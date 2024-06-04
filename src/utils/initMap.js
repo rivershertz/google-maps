@@ -21,5 +21,17 @@ export async function initMap() {
       map: map,
       title: d.name,
     });
+
+    const infowindow = new google.maps.InfoWindow({
+      content: d.code,
+      ariaLabel: d.code,
+    });
+
+    marker.addListener('click', () => {
+      infowindow.open({
+        anchor: marker,
+        map,
+      });
+    });
   });
 }

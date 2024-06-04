@@ -1,0 +1,35 @@
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.table-wrapper {
+  height: 400px;
+  width: max-content;
+  overflow: scroll;
+  border: 1px solid red;
+  margin-block-start: 1rem;
+  font-size: small;
+}
+
+.table-wrapper > table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table-wrapper th,
+td {
+  padding: 10px;
+}
+
+.table-wrapper th {
+  min-width: max-content;
+}
+
+.table-wrapper tbody tr:hover {
+  background-color: rgb(228, 228, 228);
+  cursor: pointer;
+  transform: translateY(-2px);
+  transition: background-color 0.15s ease, transform 0.3s ease;
+}
