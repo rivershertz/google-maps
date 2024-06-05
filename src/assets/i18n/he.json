@@ -1,8 +1,8 @@
 {
   "tableHeaders": {
     "name": "שם המסך",
-    "code": "מזהה",
     "status": "חיבור לאינטרנט",
+    "code": "מזהה",
     "appVersion": "עדכון",
     "aspectRatio": "רזולוציה"
   }
