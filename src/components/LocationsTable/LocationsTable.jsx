@@ -1,19 +1,16 @@
 import data from '../../data';
 import i18n from '../../assets/i18n/he.json';
 import './style.css';
-import {createRef, useEffect} from 'react';
+import {useEffect} from 'react';
 export default function LocationsTable({currentLocation, setCurrentLocation}) {
-  const table = createRef();
   useEffect(() => {
     const el = document.getElementById(currentLocation.code);
     if (!el) return;
     el.scrollIntoView({behavior: 'smooth', block: 'center'});
-  }, [currentLocation, table]);
+  }, [currentLocation]);
   return (
     <>
-      <div
-        className="table-wrapper"
-        ref={table}>
+      <div className="table-wrapper">
         <table
           dir="rtl"
           className="table">

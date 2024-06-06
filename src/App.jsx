@@ -2,27 +2,24 @@ import {useEffect, useState} from 'react';
 import LocationsTable from './components/LocationsTable/LocationsTable';
 import data from './data.js';
 import i18n from './assets/i18n/he.json';
-// import {initMap} from './utils/initMap';
+import {MarkerClusterer} from '@googlemaps/markerclusterer';
 
 export default function App() {
   const [currentLocation, setCurrentLocation] = useState({});
 
   async function initMap() {
     let map;
-    const startingPosition = {lat: 31.771959, lng: 35.217018};
-    // Request needed libraries.
     const {Map} = await google.maps.importLibrary('maps');
     await google.maps.importLibrary('marker');
 
-    // The map, centered at Jerusalem
+    const startingPosition = {lat: 31.771959, lng: 35.217018};
     map = new Map(document.getElementById('map'), {
       zoom: 7,
       center: startingPosition,
       mapId: 'DEMO_MAP_ID',
     });
 
-    // The marker, positioned at Jerusalem
-    data.forEach((d) => {
+    const markers = data.map((d) => {
       const iconImage = document.createElement('div');
       iconImage.className = 'marker';
       iconImage.style = `background: ${
@@ -57,10 +54,28 @@ export default function App() {
           anchor: marker,
           map,
         });
-
         setCurrentLocation(d);
       });
+      return marker;
     });
+    const renderer = {
+      render: ({count, position}) => {
+        return new google.maps.Marker({
+          label: {
+            text: String(count),
+            color: 'white',
+            fontSize: '12px',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            width: '16px',
+          },
+          position,
+          map,
+          zIndex: Number(google.maps.Marker.MAX_ZINDEX) + count,
+        });
+      },
+    };
+    new MarkerClusterer({markers, map, renderer});
   }
   useEffect(() => {
     async function init() {
@@ -68,7 +83,6 @@ export default function App() {
     }
     init();
   }, []);
-  useEffect(() => {}, [currentLocation]);
 
   return (
     <main>
