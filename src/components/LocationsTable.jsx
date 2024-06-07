@@ -1,6 +1,5 @@
-import data from '../../data';
-import i18n from '../../assets/i18n/he.json';
-import './style.css';
+import data from '../data';
+import i18n from '../assets/i18n/he.json';
 import {useEffect} from 'react';
 export default function LocationsTable({currentLocation, setCurrentLocation}) {
   useEffect(() => {
